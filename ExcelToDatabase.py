@@ -18,7 +18,7 @@ engine = create_engine(
     "mysql+mysqldb://root:111111@localhost:3306/testdb1?charset=utf8", max_overflow=5)
 '''
 
-OPTION_MODE = 2  # 操作模式：1、插入；2更新
+OPTION_MODE = 1  # 操作模式：1、插入；2更新
 
 if OPTION_MODE == 1:
     filde_name = ''  # 拼接后的字段字符串
