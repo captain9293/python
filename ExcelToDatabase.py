@@ -1,20 +1,24 @@
 # -*- coding:utf-8 -*-
 import pymysql
 import xlrd
-from sqlalchemy import create_engine
 
 pymysql.install_as_MySQLdb()
 
-f_data = xlrd.open_workbook('test.xlsx')  # 读取工作簿
+f_data = xlrd.open_workbook('test2.xlsx')  # 读取工作簿
 table = f_data.sheets()[0]  # 读取第一张工作表
 
 n_rows = table.nrows  # 获取行数
 n_cols = table.ncols  # 获取列数
 
+DB = pymysql.connect('localhost', 'root', '111111', 'testdb1')
+cursor = DB.cursor()
+
+'''
 engine = create_engine(
     "mysql+mysqldb://root:111111@localhost:3306/testdb1?charset=utf8", max_overflow=5)
+'''
 
-OPTION_MODE = 1  # 操作模式：1、插入；2更新
+OPTION_MODE = 2  # 操作模式：1、插入；2更新
 
 if OPTION_MODE == 1:
     filde_name = ''  # 拼接后的字段字符串
@@ -41,7 +45,24 @@ if OPTION_MODE == 1:
                 filde_name, vals)
             print(sql)
             try:
-                engine.execute(sql)
+                cursor.execute(sql)
+                DB.commit()
             except:
                 print('插入数据失败！')
+                DB.rollback()
             val_lst.clear()  # 清空值列表
+elif OPTION_MODE == 2:
+    for j in range(n_rows):
+        key = '\'%s\'' % (str(table.cell(j, 0).value))
+        v1 = '\'%s\'' % (str(table.cell(j, 1).value))
+        v2 = '\'%s\'' % (str(table.cell(j, 2).value))
+        sql = 'update pythontest set ygbh = %s ,mobile = %s where name = %s'%(v1, v2, key)
+        print(sql)
+        try:
+            cursor.execute(sql)
+            DB.commit()
+        except:
+            print('插入数据失败！')
+            DB.rollback()
+
+DB.close()
