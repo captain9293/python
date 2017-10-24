@@ -10,10 +10,10 @@ import requests
 BODY = ''
 WITE = 0
 
-home_page = 'http://cl.7sh.pw/' #首页链接
+home_page = 'http://cl.ydov.pw' #首页链接
 pat1 = 'http://www.viidii.info/\\?http://www______rmdown______com/link______php\\?hash=[a-zA-Z0-9]+' #种子下载页面规则
 pat2 = 'htm_data\\/[0-9]\\/[0-9]+\\/[0-9]+\\.html' #帖子链接规则
-pat3 = '<h3><a href="htm_data\\/[0-9]\\/[0-9]+\\/[0-9]+\\.html" target="_blank" id="">.*美熟.*' #帖子标题规则
+pat3 = '<h3><a href="htm_data\\/[0-9]\\/[0-9]+\\/[0-9]+\\.html" target="_blank" id="">.*丝雨.*' #帖子标题规则
 
 
 def get_html(url):
@@ -37,8 +37,8 @@ def get_content(pat, text):
 print('正在获取主题列表....')
 
 print('正在拼装网页主体....')
-for i in range(1, 10):
-    pageurl = 'http://cl.7sh.pw/thread0806.php?fid=2&search=&page=%d'%i #进入亚洲无码区
+for i in range(1, 100):
+    pageurl = 'http://cl.ydov.pw/thread0806.php?fid=25&search=&page=%d'%i #进入亚洲无码区
     print(pageurl)
     listpage = get_html(pageurl)
     titlst = get_content(pat3, listpage)
@@ -65,7 +65,7 @@ tim = time.strftime('%Y%m%d%H%M%S', time.localtime())
 
 print('正在保存网页....')
 
-f = open('中国五好青年学习资料%s.html'%tim, 'w', encoding='UTF-8')
+f = open('丝雨%s.html'%tim, 'w', encoding='UTF-8')
 f.write(html)
 f.close()
 
