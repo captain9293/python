@@ -1,14 +1,14 @@
 # -*- coding:utf-8 -*-
-import os
-#import pymysql
-import cx_Oracle
+#import os
+import pymysql
+#import cx_Oracle
 import requests
 import json
 import time
 
-#pymysql.install_as_MySQLdb()
+pymysql.install_as_MySQLdb()
 
-os.environ["NLS_LANG"] = ".zhs16gbk"
+#os.environ["NLS_LANG"] = ".zhs16gbk"
 
 #根据推荐人编号获取营业部编号
 def get_branchno(recommendno):
@@ -27,18 +27,19 @@ def get_branchno(recommendno):
 
 
 
-while True:   
-    #DB = pymysql.connect('localhost', 'root', '111111', 'testdb1')#连接数据库MYSQL
-    DB = cx_Oracle.connect('FXCSTK_ZT/FXCSTK_ZT@172.16.199.122:1521/fxcdb3')#连接ORACLE
+while True: 
+    DB = pymysql.connect('localhost', 'root', '111111', 'testdb1')#连接数据库MYSQL
+    #DB = cx_Oracle.connect('FXCSTK_ZT/FXCSTK_ZT@172.16.199.122:1521/fxcdb3')#连接ORACLE
     cursor = DB.cursor()
 
     #查询有问题的数据
     sql = 'SELECT a.user_id, a.recommendno FROM t_stkkh_cust_oareq a, t_stkkh_origin_record b ' \
-        'WHERE a.USER_ID = b.USER_ID AND a.RECOMMENDNO IS NOT NULL AND b.SIGN_CHANNEL IS NOT NULL'
+        'WHERE a.USER_ID = b.USER_ID AND (a.RECOMMENDNO IS NOT NULL or a.RECOMMENDNO != \'\') AND b.SIGN_CHANNEL IS NOT NULL AND a.open_state = \'0\''
     print(sql)
     try:
         cursor.execute(sql)
         results = cursor.fetchall()
+        print(results)
     except:
         print('查询数据失败！')
         DB.rollback()
@@ -47,8 +48,9 @@ while True:
     if results != ():
         for i in results:
             print(i[0], i[1])
-            branch_no = get_branchno(i[0])
-            if branch_no != '':
+            branch_no = get_branchno(i[1])
+            print(branch_no)
+            if branch_no != '' and i[1] != '':
                 sql2 = 'update t_stkkh_cust_oareq set branch_no = %s where user_id = %s'%(branch_no, i[0])
                 try:
                     cursor.execute(sql2)
