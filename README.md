@@ -7,3 +7,6 @@
 2、ExcelToDatabase.py</br>
   用于将excel中的数据导入到数据库，目前版本中数据库为mysql</br>
     20171005  数据库处理还有些问题</br>
+
+3、monitorMysql.py</br>
+  用于监控数据库中的错误数据，并纠正</br>
