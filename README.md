@@ -10,3 +10,6 @@
 
 3、monitorMysql.py</br>
   用于监控数据库中的错误数据，并纠正</br>
+
+4、getsource.py</br>
+  爬取汤不热上的视频，国内需要配置代理</br>
