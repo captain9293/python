@@ -34,8 +34,8 @@ def get_source(nickname, page_index):
                         video_source = re.findall(r'<source src="(.+?)"', video_response)[0]
                         video_name = video_source.split('/')[-1] + '.mp4'
                         print(video_source)
-                        video_source = "https://vtt.tumblr.com/" + video_name
-                        print(video_source)
+                        #video_source = "https://vtt.tumblr.com/" + video_name
+                        #print(video_source)
                         write_file(video_source, video_dir, video_name)
 
             else:
