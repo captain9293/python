@@ -7,8 +7,8 @@ import re
 
 
 proxies = {
-    "http": "10.193.13.69:80",
-    "https": "10.193.13.69:80",
+    "http": "IP:PORT",
+    "https": "IP:PORT",
 }
 
 def get_source(nickname, page_index):
