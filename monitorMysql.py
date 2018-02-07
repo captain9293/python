@@ -33,7 +33,7 @@ def get_branchno(recommendno):
 
 while True: 
     #DB = pymysql.connect('localhost', 'root', '111111', 'testdb1')#连接数据库MYSQL
-    DB = cx_Oracle.connect('FXCSTK_ZT/FXCSTK_ZT@172.16.199.122:1521/fxcdb3')#连接ORACLE
+    DB = cx_Oracle.connect('用户名/密码@数据库地址:端口/fxcdb3')#连接ORACLE
     cursor = DB.cursor()
 
     #查询有问题的数据
