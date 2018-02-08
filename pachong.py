@@ -13,7 +13,7 @@ WITE = 0
 home_page = 'http://cl.w7g.xyz//' #首页链接
 pat1 = 'http://www.viidii.info/\\?http://www______rmdown______com/link______php\\?hash=[a-zA-Z0-9]+' #种子下载页面规则
 pat2 = 'htm_data\\/[0-9]+\\/[0-9]+\\/[0-9]+\\.html' #帖子链接规则
-pat3 = '<h3><a href="htm_data\\/[0-9]+\\/[0-9]+\\/[0-9]+\\.html" target="_blank" id="">.*秦先生.*' #帖子标题规则
+pat3 = '<a href="htm_data\\/[0-9]+\\/[0-9]+\\/[0-9]+\\.html" target="_blank" id="">.*<\\/a>' #帖子标题规则
 
 
 def get_html(url):
