@@ -64,8 +64,7 @@ def make_html(itemlist):
 
 if __name__ == '__main__':    
     itemlist = []
-    #page_index = sys.argv[1]
-    page_index = 5
+    page_index = sys.argv[1]
     for i in range(1, int(page_index)+1):
         print('正在获取第%d页的资源...'%i)
         singlelist = get_torrentlist(i)
